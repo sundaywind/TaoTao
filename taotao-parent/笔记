@@ -1,0 +1,8 @@
+1.Spring和SpringMVC父子容器的关系：
+	Spring容器【Service+Dao】
+	SpringMVC容器【Controller】（是Spring容器的子容器）
+	===子容器可以访问父容器，而父容器不能访问子容器===
+	如果都放到Spring容器中，springmvc.xml中就不做Controller包的扫描，结果呢？
+		请求的时候会发现一个Controller都没有，组件加载的时候会发现没有处理器，处理器的映射关系会建立不起来，必须把Controller放入到自己的SpringMVC容器中才能运行。
+		但可以把Service、Dao、Controller都扫描到SpringMVC容器中。但为了扩展不建议这么干！
+		事务必须配置到Spring容器，事务管理器不能访问Controller。
