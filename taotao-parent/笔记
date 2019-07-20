@@ -1,4 +1,49 @@
-1.Spring和SpringMVC父子容器的关系：
+1.项目结构：
+	parent			（pom聚合工程）
+		common		（jar工程）
+		manager		（pom父工程）
+			pojo	（jar工程）
+			mapper	（jar工程）
+			service	（jar工程）
+			web		（war工程）*工程中必须有一个war包。
+			
+2.商品列表实现 需要：（在1.的基础上）
+	1）创建数据库。
+	2）使用MyBatis的逆向工程生成代码。
+	3）框架整合。（SpringMVC+Spring+MyBatis）
+	4）商品列表的实现。
+
+3.互联网行业的项目中尽可能减少关联查询（并发量大的）。使用冗余来解决表单的关联关系。也有利于分库分表。
+
+4.条形码、二维码原理：
+	扫的时候会触发一个事件，走js会转换为一串数字，数字在数据库里存的商品的信息价格，然后回返。
+
+5.SKU：最小库存量单位。【同一款商品划分出不同的配置。一个SKU对应一款商品的颜色配置都已固定。例：一款手机 有土豪金有黑色、内存有16G 32G 64G，一个黑色64G就是一个SKU】
+
+6.整合思路：
+	Dao层：
+		使用MyBatis框架。创建一个mybatis-config.xml配置文件。
+		创建Spring的配置文件：applicationContext-dao.xml配置文件：
+			1）配置数据源。
+			2）需要让Spring容器管理SqlSessionFactory，单利的存在。
+			3）把mapper的代理对象放到Spring容器中，使用包扫描的方式，来加载mapper的代理对象放到Spring中。
+	Service层：
+		事务管理。
+		把Service实现类对象放到Spring容器中。
+	Web层：
+		配置注解驱动。
+		配置视图解析器。
+		扫描Controller。
+	web.xml：
+		Spring的配置。
+		SpringMVC前端控制器的配置。
+		pust乱码过滤器。
+	
+	这么多配置文件应该放到哪里？
+		pom包、jar包，都不能被其他地方引用（/WEB-INF/lib目录）。
+		项目最后要打成一个war包，所以配置文件放在war项目中。
+
+7.Spring和SpringMVC父子容器的关系：
 	Spring容器【Service+Dao】
 	SpringMVC容器【Controller】（是Spring容器的子容器）
 	===子容器可以访问父容器，而父容器不能访问子容器===
