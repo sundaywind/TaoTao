@@ -14,5 +14,43 @@
 			<artifactId>taotao-manager-pojo</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<!-- DAO: MyBatis所有基础类库 -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.4.2</version>
+		</dependency>
+		<!-- mybatis-spring整合包 -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.miemiedev</groupId>
+			<artifactId>mybatis-paginator</artifactId>
+			<version>1.2.15</version>
+		</dependency>
+		<!-- 分页插件 -->
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper</artifactId>
+			<version>5.1.2</version>
+		</dependency>
+
+		<!-- 2.数据库 -->
+		<!-- mysql-connector-java用来支持JDBC与mysql的交互 -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.37</version>
+		</dependency>
+		<!-- Druid是目前最好的数据库连接池，在功能、性能、扩展性方面，都超过其他数据库连接池， 包括DBCP、C3P0、BoneCP、Proxool、JBoss 
+			DataSource。 Druid已经在阿里巴巴部署了超过600个应用，经过多年多生产环境大规模部署的严苛考验。 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.1.10</version>
+		</dependency>
 	</dependencies>
 </project>

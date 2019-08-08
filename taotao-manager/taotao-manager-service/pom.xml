@@ -14,5 +14,23 @@
 			<artifactId>taotao-manager-mapper</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- 2)这个jar包是所有文件都要用到的，它包含访问配置文件、创建和管理bean以及进行（ioc/Di） 操作相关的所有类，如果应用只需要基本的（ioc/Di）操作，引入core与bean的jar包就足够了 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- 3)这个jae包为spring核心提供了大量的扩展，可以找到使用spring ApplicationContext特性时所需的全部标签及所需要 
+			的全部的类，instrumentation组件及校验Validation方面的相关类。 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
 	</dependencies>
 </project>
