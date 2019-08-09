@@ -60,10 +60,12 @@
 	
 4.后台管理系统工程搭建：
 	1）父工程的搭建：父工程是一个pom工程。在父工程中定义规定依赖的jar包的版本信息、插件的版本号。（<dependencyManagement><pluginManagement>不实际依赖，只定义版本）
-	
-
-	
-
+	2）通用工具类工程：pom.xml Copy父工程中，项目中通用的jar包。
+	3）后台管理工程：pom.xml 依赖common工程。要运行工程，需要运行聚合工程也就是taotao-manager，在pom文件中添加Tomcat插件。
+	4）pojo：不需要依赖任何。
+	5）mapper：要依赖pojo，MyBatis，MySQL，连接池。
+	6）service：需要依赖mapper，牵扯到事务 还需要依赖Spring。
+	7）web：需要依赖service，跟前端相关的依赖（JSP相关、文件上传组件）
 
 1.项目结构：
 	parent			（pom聚合工程）
@@ -73,6 +75,12 @@
 			mapper	（jar工程）
 			service	（jar工程）
 			web		（war工程）*工程中必须有一个war包。
+
+2.启动工程：
+	使用maven命令：clean tomcat7:run（tomcat7指定使用tomcat7的插件）
+	注意：
+		1、需要把taotao-parent工程安装到本地仓库。（Install）
+		2、需要把taotao-common安装到本地仓库。
 			
 2.商品列表实现 需要：（在1.的基础上）
 	1）创建数据库。
