@@ -13,7 +13,7 @@
 	<!-- 加载配置文件 -->
 	<context:property-placeholder location="classpath:resource/db.properties" />
 	<!-- 数据库连接池 -->
-	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
 		<property name="url" value="${jdbc.url}" />
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
@@ -23,10 +23,10 @@
 	</bean>
 	<!-- 让spring管理sqlsessionfactory 使用mybatis和spring整合包中的 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<!-- 数据库连接池 -->
-		<property name="dataSource" ref="dataSource" />
 		<!-- 加载mybatis的全局配置文件 -->
 		<property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
+		<!-- 数据库连接池 -->
+		<property name="dataSource" ref="dataSource" />
 	</bean>
 	<!-- 配置扫描包，加载mapper代理类对象 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">

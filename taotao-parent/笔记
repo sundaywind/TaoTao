@@ -2,7 +2,7 @@
 	✔电商行业：
 	✖传统行业：
 	
-3.电商行业特点：
+2.电商行业特点：
 	1）技术新
 	2）技术范围广
 	3）分布式
@@ -11,13 +11,13 @@
 	6）业务复杂
 	7）系统安全
 
-4.电商行业模式：
+3.电商行业模式：
 	B2B：企业到企业，商家到商家。代表：阿里巴巴、慧聪网
 	B2C：商家到客户。代表：淘淘商城、京东、淘宝商城（B2B2C）
 	C2C：客户到客户。代表：闲鱼
 	O2O：线上到线下。代表：实体店商家注册到网上网店
 	
-2.大纲：
+4.大纲：
 	1）项目工程搭建，框架整合。
 	2）后台管理：后台商品分类的展示、分页插件、商品添加、商品类目的选择、图片上传、富文本编辑器、商品规格的实现。
 	3）前台系统：搭建、首页商品分类的展示、Jsonp、前台大广告位的展示、商品详情页面的展示、购物车订单系统的实现。
@@ -49,7 +49,7 @@
 		缺点：
 			系统之间交互需要额外的工作量来进行接口的开发。
 		
-3.技术选型（主要技术）
+8.技术选型（主要技术）
 	Spring、SpringMVC、MyBatis
 	JSP、JSTL、jQuery、jQuery plugin、EasyUI、KindEditor（富文本编辑器）、CSS+DIV
 	Redis（缓存服务器）
@@ -58,7 +58,7 @@
 	MySQL
 	Nginx（web反向代理服务器）
 	
-4.后台管理系统工程搭建：
+9.后台管理系统工程搭建：
 	1）父工程的搭建：父工程是一个pom工程。在父工程中定义规定依赖的jar包的版本信息、插件的版本号。（<dependencyManagement><pluginManagement>不实际依赖，只定义版本）
 	2）通用工具类工程：pom.xml Copy父工程中，项目中通用的jar包。
 	3）后台管理工程：pom.xml 依赖common工程。要运行工程，需要运行聚合工程也就是taotao-manager，在pom文件中添加Tomcat插件。
@@ -67,7 +67,7 @@
 	6）service：需要依赖mapper，牵扯到事务 还需要依赖Spring。
 	7）web：需要依赖service，跟前端相关的依赖（JSP相关、文件上传组件）
 
-1.项目结构：
+10.项目结构：
 	parent			（pom聚合工程）
 		common		（jar工程）
 		manager		（pom父工程）
@@ -76,13 +76,35 @@
 			service	（jar工程）
 			web		（war工程）*工程中必须有一个war包。
 
-2.启动工程：
+11.启动工程：
 	使用maven命令：clean tomcat7:run（tomcat7指定使用tomcat7的插件）
 	注意：
 		1、需要把taotao-parent工程安装到本地仓库。（Install）
 		2、需要把taotao-common安装到本地仓库。
-			
-2.商品列表实现 需要：（在1.的基础上）
+
+12.框架整合思路：
+	Dao层：
+		使用MyBatis框架。创建一个mybatis-config.xml（sqlMapConfig.xml）配置文件。
+		创建Spring的配置文件：applicationContext-dao.xml配置文件：
+			1）配置数据源。
+			2）需要让Spring容器管理SqlSessionFactory，单利的存在。
+			3）把mapper的代理对象放到Spring容器中，使用包扫描的方式，来加载mapper的代理对象放到Spring中。
+	Service层：
+		事务管理。
+		把Service实现类对象放到Spring容器中。
+	Web表现层：
+		配置注解驱动。
+		配置视图解析器。
+		扫描Controller。
+	web.xml
+		Spring的配置。
+		SpringMVC前端控制器的配置。
+		post乱码过滤器。	
+	这么多配置文件应该放到哪里？
+		pom包、jar包，都不能被其他地方引用（/WEB-INF/lib目录）。
+		项目最后要打成一个war包，所以配置文件放在war项目中。
+					
+12.商品列表实现 需要：（在1.的基础上）
 	1）创建数据库。
 	2）使用MyBatis的逆向工程生成代码。
 	3）框架整合。（SpringMVC+Spring+MyBatis）
@@ -95,28 +117,7 @@
 
 5.SKU：最小库存量单位。【同一款商品划分出不同的配置。一个SKU对应一款商品的颜色配置都已固定。例：一款手机 有土豪金有黑色、内存有16G 32G 64G，一个黑色64G就是一个SKU】
 
-6.整合思路：
-	Dao层：
-		使用MyBatis框架。创建一个mybatis-config.xml配置文件。
-		创建Spring的配置文件：applicationContext-dao.xml配置文件：
-			1）配置数据源。
-			2）需要让Spring容器管理SqlSessionFactory，单利的存在。
-			3）把mapper的代理对象放到Spring容器中，使用包扫描的方式，来加载mapper的代理对象放到Spring中。
-	Service层：
-		事务管理。
-		把Service实现类对象放到Spring容器中。
-	Web层：
-		配置注解驱动。
-		配置视图解析器。
-		扫描Controller。
-	web.xml
-		Spring的配置。
-		SpringMVC前端控制器的配置。
-		pust乱码过滤器。
-	
-	这么多配置文件应该放到哪里？
-		pom包、jar包，都不能被其他地方引用（/WEB-INF/lib目录）。
-		项目最后要打成一个war包，所以配置文件放在war项目中。
+
 
 7.Spring和SpringMVC父子容器的关系：
 	Spring容器【Service+Dao】

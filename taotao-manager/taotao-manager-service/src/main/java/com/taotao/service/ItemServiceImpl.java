@@ -24,7 +24,7 @@ public class ItemServiceImpl implements ItemService{
 		/*根据查询条件*/
 		// 1.创建example对象
 		TbItemExample example = new TbItemExample();
-		// 2.创建查询条件【Criteria：条件】
+		// 2.添加查询条件【Criteria：条件】
 		Criteria criteria = example.createCriteria();
 		// 3.根据ID查，将id放入条件中
 		criteria.andIdEqualTo(itemId);
