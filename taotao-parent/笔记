@@ -127,8 +127,53 @@
 	3）框架整合。（SpringMVC+Spring+MyBatis）
 	4）商品列表的实现。
 
-		
-	
+15.MyBatis的PageHelper分页插件：
+	1）使用：
+		第一步：引入pageHelper的jar包。
+		第二步：需要在SqlMapConfig.xml中配置插件。
+			<?xml version="1.0" encoding="UTF-8" ?>
+			<!DOCTYPE configuration
+					PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+					"http://mybatis.org/dtd/mybatis-3-config.dtd">
+			<configuration>
+				<!-- 配置分页插件 -->
+				<plugins>
+					<plugin interceptor="com.github.pagehelper.PageHelper">
+						<!-- 设置数据库类型 Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库-->        
+			        	<property name="dialect" value="mysql"/>
+					</plugin>
+				</plugins>
+			</configuration>
+		第三步：在查询的sql语句执行之前，添加一行代码：
+			PageHelper.startPage(1, 10);
+			第一个参数是page，要显示第几页。
+			第二个参数是rows，没页显示的记录数。
+		第四步：取查询结果的总数量。
+			创建一个PageInfo类的对象，从对象中取分页信息。
+	2）测试：
+		public class TestPageHelper {
+			@Test
+			public void testPageHelper() {
+				// 创建一个spring容器
+				@SuppressWarnings("resource")
+				ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring/applicationContext-*.xml");
+				// 从spring容器中获得Mapper的代理对象
+				TbItemMapper mapper = applicationContext.getBean(TbItemMapper.class);
+				// 执行查询，并分页
+				TbItemExample example = new TbItemExample();
+				// 分页处理
+				PageHelper.startPage(2, 10); // 参数是：当前页，每页显示的条数
+				List<TbItem> list = mapper.selectByExample(example);
+				// 取商品列表
+				for (TbItem tbItem : list) {
+					System.out.println(tbItem.getTitle());
+				}
+				// 取分页信息
+				PageInfo<TbItem> pageInfo = new PageInfo<>(list);
+				long total = pageInfo.getTotal();
+				System.out.println("共有商品：" + total);
+			}
+		}
 
 
 
