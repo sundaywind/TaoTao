@@ -7,7 +7,7 @@
 	    <table cellpadding="5">
 	        <tr>
 	            <td>商品类目:</td>
-	            <td>
+	            <td>	<!-- javascript:void(0)：死链接，不做任何事情 --><!-- easyui-linkbutton：EasyUI的按钮样式；selectItemCat：本页没有，所以很大可能是引用的页面或者js中有，搜索！ -->
 	            	<a href="javascript:void(0)" class="easyui-linkbutton selectItemCat">选择类目</a>
 	            	<input type="hidden" name="cid" style="width: 280px;"></input>
 	            </td>
