@@ -7,10 +7,10 @@
 		<artifactId>taotao-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	
+
 	<artifactId>taotao-rest</artifactId>
 	<packaging>war</packaging>
-	
+
 	<!-- 后台搭建的时候使用聚合工程，分开模块化的好处就是 如果其他工程中用到这些工程，直接依赖就行 -->
 	<dependencies>
 		<!-- 引入Dao层依赖 -->
@@ -52,17 +52,4 @@
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
-	<build>
-		<!-- 配置插件 -->
-		<plugins>
-			<plugin>
-				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat7-maven-plugin</artifactId>
-				<configuration>
-					<port>8081</port>
-					<path>/</path>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 </project>
