@@ -106,32 +106,34 @@ var TT = TAOTAO = {
     initItemCat : function(data){
     	$(".selectItemCat").each(function(i,e){
     		var _ele = $(e);
-    		if(data && data.cid){
-    			_ele.after("<span style='margin-left:10px;'>"+data.cid+"</span>");
+    		if(data && data.cid){ // 如果data并且data.cid不为空
+    			_ele.after("<span style='margin-left:10px;'>"+data.cid+"</span>"); // 遍历后写入
     		}else{
     			_ele.after("<span style='margin-left:10px;'></span>");
     		}
-    		_ele.unbind('click').click(function(){
-    			$("<div>").css({padding:"5px"}).html("<ul>")
-    			.window({
+    		_ele.unbind('click').click(function(){ // 给元素绑定单击事件
+    			$("<div>").css({padding:"5px"}).html("<ul>") 
+    			.window({	// 打开一个窗口
+    				// 窗口样式
     				width:'500',
     			    height:"450",
     			    modal:true,
     			    closed:true,
     			    iconCls:'icon-save',
     			    title:'选择类目',
-    			    onOpen : function(){
+    			    onOpen : function(){ // 窗口的open事件：当窗口打开的时候初始化树形列表
     			    	var _win = this;
-    			    	$("ul",_win).tree({
-    			    		url:'/item/cat/list',
+    			    	$("ul",_win).tree({ // 这里面实现了树形列表
+    			    		url:'/item/cat/list', // 请求初始化控件的url
     			    		animate:true,
-    			    		onClick : function(node){
-    			    			if($(this).tree("isLeaf",node.target)){
+    			    		/*每点击一个文件夹（父节点），做一次ajax请求。参数为：id - 当前节点的id，根据此id查询子节点 */
+    			    		onClick : function(node){ // 点击某一个节点，触发单击事件
+    			    			if($(this).tree("isLeaf",node.target)){ // 判断是不是叶子节点，如果是
     			    				// 填写到cid中
     			    				_ele.parent().find("[name=cid]").val(node.id);
     			    				_ele.next().text(node.text).attr("cid",node.id);
     			    				$(_win).window('close');
-    			    				if(data && data.fun){
+    			    				if(data && data.fun){ // 返回一个类似JSON格式的数据
     			    					data.fun.call(this,node);
     			    				}
     			    			}

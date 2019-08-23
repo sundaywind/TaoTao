@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link href="/js/kindeditor-4.1.10/themes/default/default.css" type="text/css" rel="stylesheet">
-<script type="text/javascript" charset="utf-8" src="/js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
-<script type="text/javascript" charset="utf-8" src="/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/kindeditor-4.1.10/kindeditor-all-min.js"></script><!-- 必须引入的 -->
+<script type="text/javascript" charset="utf-8" src="/js/kindeditor-4.1.10/lang/zh_CN.js"></script><!-- 鼠标上上去的提示 -->
 <div style="padding:10px 10px 10px 10px">
 	<form id="itemAddForm" class="itemForm" method="post">
 	    <table cellpadding="5">
 	        <tr>
 	            <td>商品类目:</td>
-	            <td>
+	            <td>	<!-- javascript:void(0)：死链接，不做任何事情 --><!-- easyui-linkbutton：EasyUI的按钮样式；selectItemCat：本页没有，所以很大可能是引用的页面或者js中有，搜索！ -->
 	            	<a href="javascript:void(0)" class="easyui-linkbutton selectItemCat">选择类目</a>
 	            	<input type="hidden" name="cid" style="width: 280px;"></input>
 	            </td>
@@ -68,6 +68,7 @@
 	//页面初始化完毕后执行此方法
 	$(function(){
 		//创建富文本编辑器
+		/*         /js/kindeditor-4.1.10/common.js     选择器                      */
 		itemAddEditor = TAOTAO.createEditor("#itemAddForm [name=desc]");
 		//初始化类目选择和图片上传器
 		TAOTAO.init({fun:function(node){
