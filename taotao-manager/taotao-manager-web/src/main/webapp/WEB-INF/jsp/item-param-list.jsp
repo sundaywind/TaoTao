@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!-- 也是html片段 -->
 <table class="easyui-datagrid" id="itemParamList" title="商品列表" 
        data-options="singleSelect:false,collapsible:true,pagination:true,url:'/item/param/list',method:'get',pageSize:30,toolbar:itemParamListToolbar">
-    <thead>
+    <thead>																	<!-- 商品列表：ID、商品类目ID、商品类目、规格 -->
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
         	<th data-options="field:'id',width:60">ID</th>
@@ -41,8 +42,8 @@
         text:'新增',
         iconCls:'icon-add',
         handler:function(){
-        	TAOTAO.createWindow({
-        		url : "/item-param-add",
+        	TAOTAO.createWindow({ // 打开新的窗口
+        		url : "/item-param-add", // 取html片段
         	});
         }
     },{

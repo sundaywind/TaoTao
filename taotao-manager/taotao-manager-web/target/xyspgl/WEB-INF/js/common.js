@@ -127,11 +127,13 @@ var TT = TAOTAO = {
     			    		animate:true,
     			    		onClick : function(node){
     			    			if($(this).tree("isLeaf",node.target)){
-    			    				// 填写到cid中
-    			    				_ele.parent().find("[name=cid]").val(node.id);
-    			    				_ele.next().text(node.text).attr("cid",node.id);
+    			    				// 如果是叶子节点 填写到cid中 并显示其名称
+    			    				_ele.parent().find("[name=cid]").val(node.id);	 // 把cid放入<input name=cid>中
+    			    				_ele.next().text(node.text).attr("cid",node.id); // 展示名称
     			    				$(_win).window('close');
+    			    				// 如果data.fun不为空
     			    				if(data && data.fun){
+    			    					// call 回调，this本方法
     			    					data.fun.call(this,node);
     			    				}
     			    			}

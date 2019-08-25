@@ -191,10 +191,12 @@ var TT = TAOTAO = {
     	$(".panel-tool-close").click();
     },
     
+    // 商品添加时，将模板信息生成表单
     changeItemParam : function(node,formId){
     	$.getJSON("/item/param/query/itemcatid/" + node.id,function(data){
 			  if(data.status == 200 && data.data){
 				 $("#"+formId+" .params").show();
+				 // JSON.parse(String)：将String转换为JSON对象，JSON自带的 直接调用。
 				 var paramData = JSON.parse(data.data.paramData);
 				 var html = "<ul>";
 				 for(var i in paramData){

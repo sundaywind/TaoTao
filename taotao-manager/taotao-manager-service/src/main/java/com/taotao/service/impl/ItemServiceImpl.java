@@ -14,9 +14,11 @@ import com.taotao.common.utils.ExceptionUtil;
 import com.taotao.common.utils.IDUtils;
 import com.taotao.mapper.TbItemDescMapper;
 import com.taotao.mapper.TbItemMapper;
+import com.taotao.mapper.TbItemParamItemMapper;
 import com.taotao.pojo.TbItem;
 import com.taotao.pojo.TbItemDesc;
 import com.taotao.pojo.TbItemExample;
+import com.taotao.pojo.TbItemParamItem;
 import com.taotao.pojo.TbItemExample.Criteria;
 import com.taotao.service.ItemService;
 
@@ -27,6 +29,8 @@ public class ItemServiceImpl implements ItemService{
 	private TbItemMapper itemMapper;
 	@Autowired
 	private TbItemDescMapper itemDescMapper;
+	@Autowired
+	private TbItemParamItemMapper itemParamItemMapper;
 	
 	@Override
 	public TbItem getItemById(Long itemId) {
@@ -68,7 +72,7 @@ public class ItemServiceImpl implements ItemService{
 	}
 
 	@Override
-	public TaotaoResult insertItem(TbItem item, String desc) throws Exception {
+	public TaotaoResult insertItem(TbItem item, String desc, String itemParam) throws Exception {
 		long id;
 		try {
 			// 补全POJO
@@ -90,6 +94,12 @@ public class ItemServiceImpl implements ItemService{
 			// Spring管理实务，如果有异常，Spring会自己回滚！
 			throw new Exception();
 		}
+		// 插入商品规格参数信息
+		result = insertItemParam(id, itemParam);
+		if (result.getStatus() != 200) {
+			// Spring管理实务，如果有异常，Spring会自己回滚！
+			throw new Exception();
+		}
 		return TaotaoResult.ok();
 	}
 	
@@ -103,6 +113,21 @@ public class ItemServiceImpl implements ItemService{
 		itemDesc.setCreated(new Date());
 		itemDesc.setUpdated(new Date());
 		itemDescMapper.insert(itemDesc);
+		return TaotaoResult.ok();
+	}
+	
+	/*
+	 * 	添加商品规格参数信息到商品规格 参数表 tb_item_param_item
+	 */
+	private TaotaoResult insertItemParam(long itemId, String itemParam) {
+		// 创建并补全POJO
+		TbItemParamItem itemParamItem = new TbItemParamItem();
+		itemParamItem.setItemId(itemId);
+		itemParamItem.setParamData(itemParam);
+		itemParamItem.setCreated(new Date());
+		itemParamItem.setUpdated(new Date());
+		// 插入数据
+		itemParamItemMapper.insert(itemParamItem);
 		return TaotaoResult.ok();
 	}
 

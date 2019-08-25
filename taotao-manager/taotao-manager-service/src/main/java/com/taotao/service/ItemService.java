@@ -10,6 +10,6 @@ public interface ItemService {
 	
 	public Page getPage(int page, int rows);
 	
-	public TaotaoResult insertItem(TbItem item, String desc) throws Exception;
+	public TaotaoResult insertItem(TbItem item, String desc, String itemParam) throws Exception;
 	
 }

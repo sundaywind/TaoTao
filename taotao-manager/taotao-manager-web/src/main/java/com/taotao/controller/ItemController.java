@@ -44,8 +44,8 @@ public class ItemController {
 	 */
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	@ResponseBody
-	public TaotaoResult insertItem(TbItem item, String desc) throws Exception { // desc跟jsp中name一致
-		TaotaoResult result = itemService.insertItem(item, desc);
+	public TaotaoResult insertItem(TbItem item, String desc, String itemParams) throws Exception { // desc跟jsp中name一致
+		TaotaoResult result = itemService.insertItem(item, desc, itemParams);
 		return result;
 	}
 	
