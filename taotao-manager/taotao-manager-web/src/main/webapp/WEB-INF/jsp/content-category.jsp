@@ -12,7 +12,8 @@
 <script type="text/javascript">
 $(function(){
 	$("#contentCategory").tree({
-		url : '/content/category/list',
+		// 页面初始化的时候，调用URL来初始化ID为contentCategory的树形图
+		url : '/content/category/list', // 首先返回一个JSON数据。格式为：ID、text、status。第一次访问的时候先打开parentId为0的，文件夹关闭，打开后传ID去请求第二级，根据parentId为0，依次类推。
 		animate: true,
 		method : "GET",
 		onContextMenu: function(e,node){

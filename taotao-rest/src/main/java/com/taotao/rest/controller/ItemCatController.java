@@ -33,7 +33,7 @@ public class ItemCatController {
 		return result;
 	}*/
 	
-	// 方法二：Spring4.1版本后，自带了一个工具类 MappingJacksonValue
+	// 方法二：Spring4.1版本后，自带了一个工具类 MappingJacksonValue：jsonp调用服务包装的方法。
 	@RequestMapping(value="/itemcat/list")
 	@ResponseBody
 	public Object getItemCatList(String callback) {
