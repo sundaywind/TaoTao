@@ -472,10 +472,15 @@
 ==========================第6天：CMS（Content Management System的缩写，意为"内容管理系统"。）==========================
 20.CSM系统实现：
 	1）内容分析：找管理内容的共性（展示的内容有几大块），然后确定内容的分类（树形视图：添加、删除、重命名 功能），再实现分类后的内容管理。
-	
-		
-		
-		
+	2）内容分类实现（新增）：
+		Dao层：因为是单表查询，可以使用生成的代码。
+		Service层：
+			逻辑：接收parentid。根据parentid查询节点列表，返回返回一个EasyUI异步Tree要求的节点列表。每个节点包含三个属性id、text、state三个属性。可以使用EUTreeNode。
+			参数：id
+			返回值：List<EUTreeNode>
+		Controller层：接收页面传递过来的parentid，根据parentid查询节点列表。返回List<EUTreeNode>。需要响应json数据。
+	3）内容分类--删除、重命名【自己完了补全】		
+	4）
 		
 		
 		

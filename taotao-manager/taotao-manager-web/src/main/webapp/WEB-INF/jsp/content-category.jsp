@@ -24,10 +24,12 @@ $(function(){
                 top: e.pageY
             });
         },
+        
+        // 鼠标离开后的动作
         onAfterEdit : function(node){
         	var _tree = $(this);
-        	if(node.id == 0){
-        		// 新增节点
+        	if(node.id == 0){ // 如果节点是0，这个0（行号：57）不是数据库的0，而是用来判断新增和修改的。
+        		// 新增节点       URL			   parentId               name
         		$.post("/content/category/create",{parentId:node.parentId,name:node.text},function(data){
         			if(data.status == 200){
         				_tree.tree("update",{
