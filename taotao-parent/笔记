@@ -497,10 +497,17 @@
 21.httpClient：
 	系统服务之间的调用，需要使用httpClient来实现。
 	portal和rest是在同一个局域网内部，速度非常快，调用时间可以忽略不计。
-	
-		
-		
-		
+	1）什么是httpClient？【模拟浏览器发送http请求，服务器会一个响应，把响应内容可以取出来，得到数据】
+		HTTP和浏览器有点像，但却不是浏览器。
+		很多人觉得既然HttpClient是一个HTTP客户端编程工具，很多人把他当做浏览器来理解，但是其实HttpClient不是浏览器，它是一个HTTP通信库。
+	2）使用：
+		1.导入jar包：一个是httpclient的jar，一个是fastjson的jar。
+		2.Get、Get带参、Post、Post带参。
+	3）封装成工具类：HttpClientUtil.java
+22.大广告位的展示：
+	需求：portal使用HttpClientUtil封装的工具类 调用rest服务，获取大广告位的json字符串。如何传递给jsp？使用ModelAndView。
+==========================第7天：Redis==========================		
+
 		
 		
 		
